@@ -1,5 +1,6 @@
-use::std::env;
+use std::env;
 use std::net::IpAddr;
+use str::FromStr;
 
 struct Arguments {
     flag: String,
@@ -9,10 +10,26 @@ struct Arguments {
 
 impl Arguments {
     fn new(args: &[String]) -> Result<Arguments, &'static str> {
+
+        // Check if the length of args is too big or too small
         if args.len() < 2 {
             return Err("not enough arguments");
-        } else if args.len()> 4 {
+        } else if args.len() > 4 {
             return Err("too many arguments");
+        }
+
+        // Takes ownership of the second value of args, i.e., the ip: program_name -flag #threads 0.0.0.0
+        lef f = args[1].clone();
+
+        if let Ok(ipaddr) = IpAddr::from_str(&f) {
+            return Ok(Arguments {flag: String::from(""), ipaddr, thtreads: 4});
+        } else {
+            let flag = args[1].clone(),
+            if flag.contains("-h") || flag.contains("-help") && args.len() == 2 {
+                println!("Usage: -j to select how many threads you want
+\r\n -h or -help to show this help message");
+                return Err("help");
+            } else if flag.contains("-h")
         }
     }
 }

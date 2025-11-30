@@ -1,6 +1,7 @@
 [workspace]
 
 members = [
+    "burnai",
     "guessing_game",
     "hello_cargo",
     "hello_world",
